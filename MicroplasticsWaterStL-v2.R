@@ -106,6 +106,7 @@ View(AvRepSumPart)
 #  geom_bar(position="stack", stat="identity")
 
 # New facet label names for net size variable
+# TODO: Changer les couleurs 
 Netlabs <- c("A. 300 um", "B. 100 um")
 names(Netlabs) <- c("Manta", "Polym")
 
