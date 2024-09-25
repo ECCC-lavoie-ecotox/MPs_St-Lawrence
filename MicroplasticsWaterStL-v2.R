@@ -33,7 +33,7 @@ library(vegan)
 #####################
 
 # Load data with microplastic count
-Micro <- readxl::read_xlsx("Results_2.xlsx", sheet = "TransposeR")
+Micro <- readxl::read_xlsx("data/Results_2.xlsx", sheet = "TransposeR")
 
 ## Use transposed DF and pivot it to have 1 column for count
 Microp <- Micro |>
@@ -120,7 +120,7 @@ pl1
 
 
 ggsave(
-  filename = "Figs/Stack-ByNet_bySite_byPoly.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+  filename = "figs/Stack-ByNet_bySite_byPoly.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
   plot = pl1, # Fournir le nom de l'objet plot dans R
   height = 8.5 * 0.75, # Fournir les dimensions voulues
   width = 11 * 0.75,
@@ -163,7 +163,7 @@ pl2 <- AvRepSumPoly |>
 pl2
 
 ggsave(
-  filename = "Figs/Stack-ByNet_bySite_byFiber.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+  filename = "figs/Stack-ByNet_bySite_byFiber.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
   plot = pl2, # Fournir le nom de l'objet plot dans R
   height = 8.5 * 0.5, # Fournir les dimensions voulues
   width = 11 * 0.75,
@@ -212,7 +212,7 @@ M6 <- lm(LPPML1 ~ UD + Site + NetType, data = dat)
 AIC.table <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6)
 # (AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 AICdf <- data.frame(AIC.table) |> dplyr::select(-X.Intercept., -weight)
-write.csv(AICdf, "Figs/AIC_lm_bothNet.csv")
+write.csv(AICdf, "figs/AIC_lm_bothNet.csv")
 
 # M4, 0, 2,1
 anova(M4) # 1
@@ -255,7 +255,7 @@ pb1 <- ggplot(dat, aes(x = Site, y = PPML1)) +
 pb1
 
 ggsave(
-  filename = "Figs/BoxTukey-bySite.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+  filename = "figs/BoxTukey-bySite.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
   plot = pb1, # Fournir le nom de l'objet plot dans R
   height = 8.5 * 0.75, # Fournir les dimensions voulues
   width = 11 * 0.75,
@@ -299,7 +299,7 @@ AIC.table <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6)
 # (AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 AICdf <- data.frame(AIC.table)
 AICdf <- data.frame(AIC.table) |> dplyr::select(-X.Intercept., -weight)
-write.csv(AICdf, "Figs/AIC_lm_Fiber.csv")
+write.csv(AICdf, "figs/AIC_lm_Fiber.csv")
 
 anova(M0) # 1
 summary(M0)
@@ -336,7 +336,7 @@ pb3 <- ggplot(dat, aes(x = Site, y = PPML1)) +
 pb3
 
 ggsave(
-  filename = "Figs/BoxTukey-bySite-Fibre.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+  filename = "figs/BoxTukey-bySite-Fibre.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
   plot = pb3, # Fournir le nom de l'objet plot dans R
   height = 8.5 * 0.75, # Fournir les dimensions voulues
   width = 11 * 0.75,
@@ -366,7 +366,7 @@ AIC.table <- MuMIn::model.sel(M0, M1, M2, M3, M4, M5, M6)
 # (AIC.table <- AIC.table[ , c("df", "logLik", "AICc", "delta")])
 AICdf <- data.frame(AIC.table)
 AICdf <- data.frame(AIC.table) |> dplyr::select(-X.Intercept., -weight)
-write.csv(AICdf, "Figs/AIC_lm_Fragment.csv")
+write.csv(AICdf, "figs/AIC_lm_Fragment.csv")
 
 anova(M4) # 1
 summary(M4)
@@ -412,7 +412,7 @@ pb2 <- ggplot(dat, aes(x = Site, y = PPML1)) +
 pb2
 
 ggsave(
-  filename = "Figs/BoxTukey-bySite-Fragment.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+  filename = "figs/BoxTukey-bySite-Fragment.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
   plot = pb2, # Fournir le nom de l'objet plot dans R
   height = 8.5 * 0.75, # Fournir les dimensions voulues
   width = 11 * 0.75,
@@ -432,7 +432,7 @@ F1 <- gridExtra::grid.arrange(gridExtra::arrangeGrob(pb1, left = grid::textGrob(
 
 F1
 ggsave(
-  filename = "Figs/BoxTukey-3plots.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
+  filename = "figs/BoxTukey-3plots.png", # Nommez le fichier dans lequel vous voulez enregistrer, ajoutez l'extension du format de fichier que vous voulez utiliser (ex. pdf).
   plot = F1, # Fournir le nom de l'objet plot dans R
   height = 8.5, # Fournir les dimensions voulues
   width = 11,
@@ -467,7 +467,7 @@ PolNMDS <- dplyr::filter(NMDSdf, NetType == "Polym")
 # use "allNMDS" dataset
 
 # add matching abbreviations of polymers
-PolNam <- read.csv("PolymerAbbreviationNames.csv", sep = ";")
+PolNam <- read.csv("data/PolymerAbbreviationNames.csv", sep = ";")
 allNMDS$Polymer <- as.factor(allNMDS$Polymer)
 levels(allNMDS$Polymer)
 
@@ -524,7 +524,7 @@ NMDSall$Nb <- c(1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5
 # Construct the biplot
 # with all replicates
 png(
-  file = "Figs/nMDS_Both-rep.png",
+  file = "figs/nMDS_Both-rep.png",
   height = 5,
   width = 5, units = "in", res = 300
 )
@@ -562,7 +562,7 @@ plot(dispersion, hull = FALSE, ellipse = TRUE) ## sd ellipse
 
 # use "ManNMDS" dataset
 # add matching abbreviations of polymers
-PolNam <- read.csv("PolymerAbbreviationNames.csv", sep = ";")
+PolNam <- read.csv("data/PolymerAbbreviationNames.csv", sep = ";")
 head(ManNMDS)
 ManNMDS$Polymer <- as.factor(ManNMDS$Polymer)
 levels(ManNMDS$Polymer)
@@ -622,7 +622,7 @@ NMDSmanta$Nb <- c(1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8,
 # with all replicates (for average per site, see other script)
 
 png(
-  file = "Figs/nMDS_Manta-rep.png",
+  file = "figs/nMDS_Manta-rep.png",
   height = 5,
   width = 5.5, units = "in", res = 300
 )
@@ -659,7 +659,7 @@ plot(dispersion, hull = FALSE, ellipse = TRUE) ## sd ellipse
 
 # use "PolNMDS" dataset
 # add matching abbreviations of polymers
-PolNam <- read.csv("PolymerAbbreviationNames.csv", sep = ";")
+PolNam <- read.csv("data/PolymerAbbreviationNames.csv", sep = ";")
 PolNMDS$Polymer <- as.factor(PolNMDS$Polymer)
 levels(PolNMDS$Polymer)
 
@@ -718,7 +718,7 @@ NMDSpoly$Nb <- c(2, 2, 3, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 8, 8, 8, 9, 9, 
 # with all replicates (for average per site, see other script)
 
 png(
-  file = "Figs/nMDS_Poly-rep.png",
+  file = "figs/nMDS_Poly-rep.png",
   height = 5,
   width = 5, units = "in", res = 300
 )
