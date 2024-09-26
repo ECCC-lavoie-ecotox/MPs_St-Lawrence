@@ -17,6 +17,11 @@ waters <- sf::st_read("data/waterbody_2.shp") |>
 if(!require("rnaturalearth")) install.packages("rnaturalearth")
 usa <- rnaturalearth::ne_countries(country = c("united states of america"), scale = 10)
 
+# Load world shapfiles
+sf_use_s2(FALSE)
+world <- rnaturalearth::ne_countries(type = "countries", scale = "small")
+north_america <- sf::st_crop(sf::st_make_valid(world), xmin = -84, ymin = 24, xmax = -50, ymax = 64)
+
 # ### Set up the plot parameters ####
 png(file = "StLawrenceRiverMap.png", height = 5, width = 5.3, units="in", res=300)
 
@@ -41,5 +46,14 @@ text(-69.8, 46.1, "USA", cex=0.8)
 addnortharrow(pos="bottomright", scale=0.6, padin=c(0.05, 0.25))
 addscalebar(style="bar", label.cex=0.8, pos="bottomright", padin=c(0.05, 0.05))
 
+par(fig = c(0.18, 0.4, 0.60, 0.90), mar = c(0, 0, 2, 2), cex.axis = 0.75, new = TRUE, asp = 1)
+par(xaxs = "i", yaxs = "i", mgp = c(0, 0.25, 0), tck = -0.02)
+
+plot(1, type="n", xlab="", ylab="", xlim=c(sf::st_bbox(north_america)[1], sf::st_bbox(north_america)[3]), ylim=c(sf::st_bbox(north_america)[2], sf::st_bbox(north_america)[4]), xaxt="n", yaxt="n") 
+
+rect(sf::st_bbox(north_america)[1], sf::st_bbox(north_america)[3], sf::st_bbox(north_america)[2], sf::st_bbox(north_america)[4], col = "lightblue")
+plot(north_america, col="white", add=T, lwd = 0.4)
+plot(sf::st_geometry(st_as_sfc(sf::st_bbox(sites), crs = 4326)), add = TRUE, border = "black")
+#rect(xMin[1],yMin[1],xMax[1],yMax[1], lwd = 2, border = "brown1")# 
 dev.off()
 
