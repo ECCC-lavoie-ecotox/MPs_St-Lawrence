@@ -54,6 +54,5 @@ plot(1, type="n", xlab="", ylab="", xlim=c(sf::st_bbox(north_america)[1], sf::st
 rect(sf::st_bbox(north_america)[1], sf::st_bbox(north_america)[3], sf::st_bbox(north_america)[2], sf::st_bbox(north_america)[4], col = "lightblue")
 plot(north_america, col="white", add=T, lwd = 0.4)
 plot(sf::st_geometry(st_as_sfc(sf::st_bbox(sites), crs = 4326)), add = TRUE, border = "black")
-#rect(xMin[1],yMin[1],xMax[1],yMax[1], lwd = 2, border = "brown1")# 
 dev.off()
 
